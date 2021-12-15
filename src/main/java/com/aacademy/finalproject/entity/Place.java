@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +16,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "places")
 public class Place {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,4 +23,8 @@ public class Place {
     @NotNull
     @Column(nullable = false, unique = true)
     private String name;
+
+    @ManyToMany(mappedBy = "places")
+    private Set<Town> towns;
+
 }
