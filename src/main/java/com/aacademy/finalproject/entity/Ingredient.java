@@ -14,8 +14,9 @@ import java.util.Set;
 @Builder
 @Getter
 @Entity
-@Table(name = "places")
-public class Place {
+@Table(name = "ingredients")
+public class Ingredient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +25,8 @@ public class Place {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "places")
-    private Set<Town> towns;
+
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Dish> dishes;
 
 }

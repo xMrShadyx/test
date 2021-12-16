@@ -26,10 +26,17 @@ public class Town {
 
     @OneToMany
     @JoinTable(
-            name = "towns_places",
+            name = "towns_restaurants",
             joinColumns = @JoinColumn(name = "town_id"),
-            inverseJoinColumns = @JoinColumn(name = "place_id")
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id")
     )
+    private Set<Restaurant> restaurants;
 
-    private Set<Place> places;
+    @OneToMany
+    @JoinTable(
+            name = "towns_neighborhoods",
+            joinColumns = @JoinColumn(name = "town_id"),
+            inverseJoinColumns = @JoinColumn(name = "neighborhoods_id")
+    )
+    private Set<Neighborhood> neighborhoods;
 }

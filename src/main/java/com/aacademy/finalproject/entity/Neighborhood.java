@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -15,8 +14,8 @@ import java.util.Set;
 @Builder
 @Getter
 @Entity
-@Table(name = "dishes")
-public class Dish {
+@Table(name = "neighborhoods")
+public class Neighborhood {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,17 +25,16 @@ public class Dish {
     @Column(nullable = false, unique = true)
     private String name;
 
-
-    @Column(nullable = false,precision = 3, scale = 2)
-    private BigDecimal price;
-
     @OneToMany
     @JoinTable(
-            name = "dishes_ingredients",
-            joinColumns = @JoinColumn(name = "dish_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+            name = "neighborhoods_restaurants",
+            joinColumns = @JoinColumn(name = "neighborhood_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id")
     )
-    private Set<Ingredient> ingredients;
+    private Set<Restaurant> restaurants;
 
-
+    @ManyToMany(mappedBy = "neighborhoods")
+    private Set<Town> towns;
 }
+
+
