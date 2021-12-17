@@ -8,6 +8,8 @@ public interface DishService {
 
     Dish findById(Long id);
 
+    Dish findByName(String name);
+
     Dish save(Dish dish);
 
     Set<Dish> findAll();
@@ -15,4 +17,6 @@ public interface DishService {
     Dish update(Dish  dish, Long id);
 
     void detachDishIngredient(Long dishId, Set<Long> ingredientsIds);
+
+    void delete(Long id);
 }

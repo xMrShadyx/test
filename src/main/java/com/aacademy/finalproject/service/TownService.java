@@ -8,11 +8,15 @@ public interface TownService {
 
     Town findById(Long id);
 
+    Town findByName(String name);
+
     Town save(Town town);
 
     Set<Town> findAll();
 
     Town update(Town town, Long id);
 
-    void detachTownRestaurant(Long townId, Set<Long> restaurantIds);
+    void detachNeighborhood(Long townId, Set<Long> neighborhoodIds);
+
+    void delete(Long id);
 }

@@ -26,9 +26,11 @@ public class Dish {
     @Column(nullable = false, unique = true)
     private String name;
 
-
+/*
     @Column(nullable = false,precision = 3, scale = 2)
     private BigDecimal price;
+
+ */
 
     @OneToMany
     @JoinTable(

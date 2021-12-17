@@ -27,10 +27,12 @@ public class Restaurant {
     @ManyToOne
     @JoinColumn(name = "dish_id" , foreignKey = @ForeignKey(name = "fk_dish_id"))
     private Dish dish;
-
+/*
     @ManyToMany(mappedBy = "restaurants")
     private Set<Town> towns;
 
+
+ */
     @ManyToMany(mappedBy = "restaurants")
     private Set<Neighborhood> neighborhoods;
 

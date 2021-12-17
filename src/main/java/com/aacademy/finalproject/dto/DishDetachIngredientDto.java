@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
-@Getter
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class IngredientDto {
+@Getter
+@Builder
+public class DishDetachIngredientDto {
+    private Long dishId;
 
-    private Long id;
-
-    private String name;
+    private Set<Long> ingredientIds;
 
 }

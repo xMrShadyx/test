@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "towns")
 public class Town {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +24,7 @@ public class Town {
     @NotNull
     @Column(nullable = false, unique = true)
     private String name;
-
+/*
     @OneToMany
     @JoinTable(
             name = "towns_restaurants",
@@ -31,6 +32,8 @@ public class Town {
             inverseJoinColumns = @JoinColumn(name = "restaurant_id")
     )
     private Set<Restaurant> restaurants;
+
+ */
 
     @OneToMany
     @JoinTable(
