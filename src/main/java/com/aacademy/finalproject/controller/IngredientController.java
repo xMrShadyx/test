@@ -20,20 +20,21 @@ public class IngredientController {
         this.ingredientService = ingredientService;
         this.ingredientConverter = ingredientConverter;
     }
+
     @PostMapping
     public ResponseEntity<IngredientDto> save(@RequestBody IngredientDto ingredientDto) {
-        Ingredient ingredient= ingredientConverter.toIngredient(ingredientDto);
+        Ingredient ingredient = ingredientConverter.toIngredient(ingredientDto);
         Ingredient savedIngredient = ingredientService.save(ingredient);
         return ResponseEntity.ok(ingredientConverter.toIngredientDto(savedIngredient));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<IngredientDto>  findById(@PathVariable Long id){
+    public ResponseEntity<IngredientDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(ingredientConverter.toIngredientDto(ingredientService.findById(id)));
     }
 
     @GetMapping(value = "{name}")
-    public ResponseEntity<IngredientDto> findByNumber(@PathVariable String name) {
+    public ResponseEntity<IngredientDto> findByName(@PathVariable String name) {
         return ResponseEntity.ok(ingredientConverter.toIngredientDto(ingredientService.findByName(name)));
     }
 
@@ -43,8 +44,6 @@ public class IngredientController {
         ingredientService.delete(id);
         return ResponseEntity.ok().build();
     }
-
-
 
 
 }
