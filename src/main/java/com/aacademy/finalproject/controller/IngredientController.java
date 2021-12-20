@@ -33,7 +33,7 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientConverter.toIngredientDto(ingredientService.findById(id)));
     }
 
-    @GetMapping(value = "{name}")
+    @GetMapping(value = "/name/{name}")
     public ResponseEntity<IngredientDto> findByName(@PathVariable String name) {
         return ResponseEntity.ok(ingredientConverter.toIngredientDto(ingredientService.findByName(name)));
     }
@@ -44,6 +44,7 @@ public class IngredientController {
         ingredientService.delete(id);
         return ResponseEntity.ok().build();
     }
+
 
 
 }
