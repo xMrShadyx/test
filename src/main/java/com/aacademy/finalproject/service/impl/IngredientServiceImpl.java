@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class IngredientServiceImpl implements IngredientService {
 
-    @Autowired
     private final IngredientRepository ingredientRepository;
 
 
@@ -39,6 +38,16 @@ public class IngredientServiceImpl implements IngredientService {
         }
 
         }
+
+    @Override
+    public Ingredient update(Ingredient ingredient, Long id) {
+        Ingredient foundIngredient = findById(id);
+        Ingredient ingredientToUpdate = Ingredient.builder()
+                .id(foundIngredient.getId())
+                .name(ingredient.getName())
+                .build();
+        return save(ingredientToUpdate);
+    }
 
     @Override
     public void delete(Long id) {

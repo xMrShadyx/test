@@ -4,30 +4,28 @@ import com.aacademy.finalproject.entity.Neighborhood;
 import com.aacademy.finalproject.exception.ResourceNotFoundException;
 import com.aacademy.finalproject.repository.NeighborhoodRepository;
 import com.aacademy.finalproject.service.NeighborhoodService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class NeighborhoodServiceImpl implements NeighborhoodService {
 
     private final NeighborhoodRepository neighborhoodRepository;
 
-    public NeighborhoodServiceImpl(NeighborhoodRepository neighborhoodRepository) {
-        this.neighborhoodRepository = neighborhoodRepository;
-    }
-
     @Override
     public Neighborhood findByName(String name) {
         return neighborhoodRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Neighbourhood with name: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Neighbourhood with name: %s does not exists", name)));
     }
 
     @Override
     public Neighborhood findById(Long id) {
         return neighborhoodRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Neighborhood with id: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Neighborhood with id: %s does not exists", id)));
     }
 
     @Override

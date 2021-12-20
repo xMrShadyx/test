@@ -5,20 +5,17 @@ import com.aacademy.finalproject.dto.RestaurantDetachDishDto;
 import com.aacademy.finalproject.dto.RestaurantDto;
 import com.aacademy.finalproject.entity.Restaurant;
 import com.aacademy.finalproject.service.RestaurantService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/restaurants")
+@AllArgsConstructor
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final RestaurantConverter restaurantConverter;
-
-    public RestaurantController(RestaurantService restaurantService, RestaurantConverter restaurantConverter) {
-        this.restaurantService = restaurantService;
-        this.restaurantConverter = restaurantConverter;
-    }
 
     @PostMapping
     public ResponseEntity<RestaurantDto> save(@RequestBody RestaurantDto restaurantDto) {
@@ -33,7 +30,7 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantConverter.toRestaurantDto(restaurantService.findById(id)));
     }
 
-    @GetMapping(value = "{name}")
+    @GetMapping(value = "/name/{name}")
     public ResponseEntity<RestaurantDto> findByName(@PathVariable String name) {
         return ResponseEntity.ok(restaurantConverter.toRestaurantDto(restaurantService.findByName(name)));
     }

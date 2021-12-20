@@ -46,8 +46,6 @@ public class IngredientControllerTest extends BaseControllerTest {
 
     @Test
     public void findById() throws Exception {
-//        when(ingredientService.findById(any(Long.class))).thenReturn(Ingredient.builder().build());
-//        when(ingredientConverter.toIngredientDto(any(Ingredient.class))).thenReturn(IngredientDto.builder().id(1L).name("Test").build());
           when(ingredientService.findById(any(Long.class))).thenReturn(Ingredient.builder().build());
           when(ingredientConverter.toIngredientDto(any(Ingredient.class))).thenReturn(IngredientDto.builder()
                   .id(1L)

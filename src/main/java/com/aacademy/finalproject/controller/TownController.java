@@ -8,21 +8,18 @@ import com.aacademy.finalproject.dto.TownDto;
 import com.aacademy.finalproject.entity.Restaurant;
 import com.aacademy.finalproject.entity.Town;
 import com.aacademy.finalproject.service.TownService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/towns")
+@AllArgsConstructor
 public class TownController {
 
     private final TownService townService;
     private final TownConverter townConverter;
-
-    public TownController(TownService townService, TownConverter townConverter) {
-        this.townService = townService;
-        this.townConverter = townConverter;
-    }
 
     @PostMapping
     public ResponseEntity<TownDto> save(@RequestBody TownDto townDto){
@@ -39,7 +36,7 @@ public class TownController {
         return ResponseEntity.ok(townDto);
     }
 
-    @GetMapping(value = "{name}")
+    @GetMapping(value = "/name/{name}")
     public ResponseEntity<TownDto> findByName(@PathVariable String name) {
         return ResponseEntity.ok(townConverter.toTownDto(townService.findByName(name)));
     }

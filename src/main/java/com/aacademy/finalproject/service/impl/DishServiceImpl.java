@@ -4,6 +4,7 @@ import com.aacademy.finalproject.entity.Dish;
 import com.aacademy.finalproject.exception.ResourceNotFoundException;
 import com.aacademy.finalproject.repository.DishRepository;
 import com.aacademy.finalproject.service.DishService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +12,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class DishServiceImpl implements DishService {
-    private final DishRepository dishRepository;
 
-    @Autowired
-    public DishServiceImpl(DishRepository dishRepository) {
-        this.dishRepository = dishRepository;
-    }
+    private final DishRepository dishRepository;
 
     @Override
     public Dish findById(Long id) {
 
         return dishRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Dish with id: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Dish with id: %s does not exists", id)));
     }
 
     @Override
     public Dish findByName(String name) {
         return dishRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Dish with name: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Dish with name: %s does not exists", name)));
     }
 
     @Override

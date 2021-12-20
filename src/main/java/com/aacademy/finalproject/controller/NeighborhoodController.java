@@ -5,21 +5,19 @@ import com.aacademy.finalproject.dto.*;
 import com.aacademy.finalproject.entity.Dish;
 import com.aacademy.finalproject.entity.Neighborhood;
 import com.aacademy.finalproject.service.NeighborhoodService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/neighborhoods")
+@AllArgsConstructor
 public class NeighborhoodController {
 
     private final NeighborhoodService neighborhoodService;
     private final NeighborhoodConverter neighborhoodConverter;
 
-    public NeighborhoodController(NeighborhoodService neighborhoodService, NeighborhoodConverter neighborhoodConverter) {
-        this.neighborhoodService = neighborhoodService;
-        this.neighborhoodConverter = neighborhoodConverter;
-    }
 
     @PostMapping
     public ResponseEntity<NeighborhoodDto> save(@RequestBody NeighborhoodDto neighborhoodDto) {
@@ -34,7 +32,7 @@ public class NeighborhoodController {
         return ResponseEntity.ok(neighborhoodConverter.toNeighborhoodDto(neighborhoodService.findById(id)));
     }
 
-    @GetMapping(value = "{name}")
+    @GetMapping(value = "/name/{name}")
     public ResponseEntity<NeighborhoodDto> findByName(@PathVariable String name) {
         return ResponseEntity.ok(neighborhoodConverter.toNeighborhoodDto(neighborhoodService.findByName(name)));
     }

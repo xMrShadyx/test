@@ -4,30 +4,28 @@ import com.aacademy.finalproject.entity.Restaurant;
 import com.aacademy.finalproject.exception.ResourceNotFoundException;
 import com.aacademy.finalproject.repository.RestaurantRepository;
 import com.aacademy.finalproject.service.RestaurantService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
-    }
-
     @Override
     public Restaurant findByName(String name) {
         return restaurantRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Restaurant with name: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Restaurant with name: %s does not exists", name)));
     }
 
     @Override
     public Restaurant findById(Long id) {
         return restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Restaurant with id: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Restaurant with id: %s does not exists", id)));
     }
 
     @Override

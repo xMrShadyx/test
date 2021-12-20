@@ -5,6 +5,7 @@ import com.aacademy.finalproject.dto.DishDetachIngredientDto;
 import com.aacademy.finalproject.dto.DishDto;
 import com.aacademy.finalproject.entity.Dish;
 import com.aacademy.finalproject.service.DishService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/dishes")
+@AllArgsConstructor
 public class DishController {
 
     private final DishService dishService;
     private final DishConverter dishConverter;
 
-    public DishController(DishService dishService, DishConverter dishConverter) {
-        this.dishService = dishService;
-        this.dishConverter = dishConverter;
-    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<DishDto> findById(@PathVariable Long id) {
@@ -31,12 +29,12 @@ public class DishController {
         return ResponseEntity.ok(dishDto);
     }
 
-    @GetMapping(value = "{name}")
+    @GetMapping(value = "/name/{name}")
     public ResponseEntity<DishDto> findByName(@PathVariable String name) {
         return ResponseEntity.ok(dishConverter.toDishDto(dishService.findByName(name)));
     }
 
-    @GetMapping(value = "{}")
+    @GetMapping
     public ResponseEntity<Set<DishDto>> findAll() {
         return ResponseEntity.ok(dishService.findAll()
                 .stream()

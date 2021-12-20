@@ -5,30 +5,29 @@ import com.aacademy.finalproject.entity.Town;
 import com.aacademy.finalproject.exception.ResourceNotFoundException;
 import com.aacademy.finalproject.repository.TownRepository;
 import com.aacademy.finalproject.service.TownService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class TownServiceImpl implements TownService {
 
     private final TownRepository townRepository;
 
-    public TownServiceImpl(TownRepository townRepository) {
-        this.townRepository = townRepository;
-    }
 
     @Override
     public Town findById(Long id) {
         return townRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Town with id: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Town with id: %s does not exists", id)));
     }
 
     @Override
     public Town findByName(String name) {
         return townRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Town with name: %s does not exists")));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Town with name: %s does not exists", name)));
     }
 
     @Override
